@@ -1,0 +1,38 @@
+name: CI Demo
+
+on : 
+    push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: checkout repository
+          uses: actions/checkout@v4
+
+        - name: install python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.12'
+        
+        - uses: iterative/setup-cml@v2
+
+        - name: install dependencies
+          run: 
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        
+        - name: run python file
+          run: python ci_cd_demo.py
+
+        - name: Create CML report
+          env:
+            REPO_TOKEN: ${{ secrets.CML_SECRET }}
+          run: |
+            echo "# model evaluation report" >> report.md
+            echo "## bar graph of model" >> report.md
+            echo "![](./plots/bar_plot.png)" >> report.md
+            cml comment create report.md
+            
