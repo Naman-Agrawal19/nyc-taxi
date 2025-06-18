@@ -34,15 +34,15 @@ stages:
       isexec: true
     - path: src/data/make_dataset.py
       hash: md5
-      md5: feb6fa96e09edbb82007e47bf0f7a98e
-      size: 1400
+      md5: 805754d48c524ad73370cab987db4450
+      size: 1474
       isexec: true
     params:
       params.yaml:
         make_dataset.random_state: 30
         make_dataset.test_size: 0.1
     outs:
-    - path: data/interim/processed_train.csv
+    - path: data/interim/train.csv
       hash: md5
       md5: fbc0c04f9785c21d960f3998a413b8f1
       size: 175992018
@@ -52,3 +52,33 @@ stages:
       md5: a69a0adfa27b23b7bf595f8372631e20
       size: 19554140
       isexec: true
+  modify_features:
+    cmd: python ./src/features/modify_features.py data/interim/train.csv 
+      data/interim/val.csv data/raw/test.csv
+    deps:
+    - path: ./data/interim/train.csv
+      hash: md5
+      md5: fbc0c04f9785c21d960f3998a413b8f1
+      size: 175992018
+      isexec: true
+    - path: ./data/interim/val.csv
+      hash: md5
+      md5: a69a0adfa27b23b7bf595f8372631e20
+      size: 19554140
+      isexec: true
+    - path: ./data/raw/test.csv
+      hash: md5
+      md5: 0686e4fc98617485dba9fdbabbf1c48d
+      size: 70794289
+      isexec: true
+    - path: ./src/features/modify_features.py
+      hash: md5
+      md5: d8bb2bcf8042b5bba6d81c5fa491f3d4
+      size: 7041
+      isexec: true
+    outs:
+    - path: ./data/processed/transformations
+      hash: md5
+      md5: a8df2014c8e26f1969e14243eea99509.dir
+      size: 206111335
+      nfiles: 3

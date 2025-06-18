@@ -3,8 +3,15 @@ raw_data:
   test_data: "data/raw/test.csv"
 
 interim_data:
-  train_data: "data/interim/processed_train.csv"
+  train_data: "data/interim/train.csv"
   val_data: "data/interim/val.csv"
+
+
+features:
+  target_column: "trip_duration"
+
+plots:
+  target_distribution: "reports/figures/target_distribution.png"
 
 model:
   save_path: "models/classifier.pkl"

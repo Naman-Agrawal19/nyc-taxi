@@ -25,7 +25,6 @@ def get_data(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
-
 def save_data(df: pd.DataFrame, path: Path) -> None:
     df.to_csv(path, index=False)
 
