@@ -7,7 +7,7 @@ save_plot_path.mkdir(parents=True, exist_ok=True)
 # plot 1(bar plot)
 
 fig = plt.figure(figsize=(12,6))
-x_points = ['Random Forest','XG Boost','Decision Trees']
+x_points = ['Random Forest','XG Boost','Decision Tree']
 y_points = [0.89, 0.94, 0.75]
 colors= ['red','green','blue']
 

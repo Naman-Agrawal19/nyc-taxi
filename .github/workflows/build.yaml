@@ -29,7 +29,7 @@ jobs:
 
         - name: Create CML report
           env:
-            REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REPO_TOKEN: ${{ secrets.CML_TOKEN }}
           run: |
             echo "# model evaluation report" >> report.md
             echo "## bar graph of model" >> report.md
