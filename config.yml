@@ -1,0 +1,12 @@
+raw_data:
+  train_data: "data/raw/train.csv"
+  test_data: "data/raw/test.csv"
+
+interim_data:
+  train_data: "data/interim/train.csv"
+  val_data: "data/interim/val.csv"
+
+model:
+  save_path: "models/classifier.pkl"
+
+main_dir: "./"
