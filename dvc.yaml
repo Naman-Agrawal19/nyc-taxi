@@ -1,9 +1,12 @@
 stages:
-  extract_dataset:
+  make_dataset:
     cmd: python src/data/make_dataset.py
     deps:
     - src/data/make_dataset.py
     - data/raw/train.csv
+    params:
+    - make_dataset.test_size
+    - make_dataset.random_state
     outs:
     - data/interim/processed_train.csv
     - data/interim/val.csv
