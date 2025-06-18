@@ -21,11 +21,11 @@ def load_params():
 def raw_train_path():
     return Path(load_config()['raw_data']['train_data'])
 
-def get_data(path):
+def get_data(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
-def save_data(df, path):
+def save_data(df: pd.DataFrame, path: Path):
     df.to_csv(path, index=False)
 
 def main():
