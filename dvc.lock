@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  extract_dataset:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - path: data/raw/train.csv
+      hash: md5
+      md5: e59c291a4b1c640f1dab33b89daa22e1
+      size: 200589097
+      isexec: true
+    - path: src/data/make_dataset.py
+      hash: md5
+      md5: feb6fa96e09edbb82007e47bf0f7a98e
+      size: 1400
+      isexec: true
+    outs:
+    - path: data/interim/processed_train.csv
+      hash: md5
+      md5: fbc0c04f9785c21d960f3998a413b8f1
+      size: 175992018
+      isexec: true
+    - path: data/interim/val.csv
+      hash: md5
+      md5: a69a0adfa27b23b7bf595f8372631e20
+      size: 19554140
+      isexec: true

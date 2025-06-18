@@ -1,0 +1,9 @@
+stages:
+  extract_dataset:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - src/data/make_dataset.py
+    - data/raw/train.csv
+    outs:
+    - data/interim/processed_train.csv
+    - data/interim/val.csv
