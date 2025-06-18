@@ -13,7 +13,5 @@ features:
 plots:
   target_distribution: "reports/figures/target_distribution.png"
 
-model:
-  save_path: "models/classifier.pkl"
 
 main_dir: "./"
