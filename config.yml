@@ -3,7 +3,7 @@ raw_data:
   test_data: "data/raw/test.csv"
 
 interim_data:
-  train_data: "data/interim/train.csv"
+  train_data: "data/interim/processed_train.csv"
   val_data: "data/interim/val.csv"
 
 model:
