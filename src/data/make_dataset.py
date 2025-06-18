@@ -8,24 +8,25 @@ current_path = Path(__file__).parent.parent.parent.resolve()
 config_path = current_path / "config.yml"
 params_path = current_path / "params.yaml"
 
-def load_config():
+def load_config() -> dict:
     with open(config_path, "r") as f:
         config = safe_load(f)
     return config
 
-def load_params():
+def load_params() -> dict:
     with open(params_path, "r") as f:
         params = safe_load(f)
     return params
 
-def raw_train_path():
+def raw_train_path() -> Path:
     return Path(load_config()['raw_data']['train_data'])
 
 def get_data(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
-def save_data(df: pd.DataFrame, path: Path):
+
+def save_data(df: pd.DataFrame, path: Path) -> None:
     df.to_csv(path, index=False)
 
 def main():
