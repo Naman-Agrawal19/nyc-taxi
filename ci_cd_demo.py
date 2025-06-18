@@ -3,7 +3,7 @@ from pathlib import Path
 
 # path to save plots
 save_plot_path = Path(__file__).parent / 'plots'
-
+save_plot_path.mkdir(parents=True, exist_ok=True)
 # plot 1(bar plot)
 
 fig = plt.figure(figsize=(12,6))
