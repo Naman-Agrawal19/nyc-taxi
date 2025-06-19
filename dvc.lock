@@ -64,10 +64,8 @@ stages:
       size: 206111335
       nfiles: 3
   build_features:
-    cmd: python ./src/features/build_features.py 
-      data/processed/transformations/train.csv 
-      data/processed/transformations/val.csv 
-      data/processed/transformations/test.csv
+    cmd: python ./src/features/build_features.py data/processed/transformations/train.csv
+      data/processed/transformations/val.csv data/processed/transformations/test.csv
     deps:
     - path: ./data/processed/transformations/test.csv
       hash: md5
