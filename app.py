@@ -2,37 +2,34 @@ from fastapi import FastAPI
 from sklearn.pipeline import Pipeline
 import uvicorn
 from data_models import PredictionDataset
-import pandas as pd
 import joblib
+import pandas as pd
 from pathlib import Path
 
-app = FastAPI()
+app = FastAPI(title="NYC Taxi Prediction API")
 
 current_file_path = Path(__file__).parent
-
-model_path = current_file_path / "container_models" / "models" / "xgbreg.joblib"
-preprocessor_path = model_path.parent.parent / "transformers" / "preprocessor.joblib"
-output_transformer_path = preprocessor_path.parent / "output_transformer.joblib"
-
+model_path = current_file_path / "models" / "models" / "xgbreg.joblib"
+preprocessor_path = current_file_path / "models" / "transformers" / "preprocessor.joblib" 
+output_transformer_path = current_file_path / "models" / "transformers" / "output_transformer.joblib"
 
 model = joblib.load(model_path)
 preprocessor = joblib.load(preprocessor_path)
 output_transformer = joblib.load(output_transformer_path)
 
-model_pipe = Pipeline(steps=[
-    ('preprocess',preprocessor),
-    ('regressor',model)
+model_pipeline = Pipeline(steps=[
+    ("preprocess", preprocessor),
+    ("regressor", model)
 ])
 
-# Get -> get some response from API
-# Post -> sending something to API
 
-@app.get('/')
+
+@app.get("/")
 def home():
     return "Welcome to taxi price prediction app"
 
-@app.post('/predictions')
-def do_predictions(test_data:PredictionDataset):
+@app.post("/predictions")
+def do_predictions(test_data: PredictionDataset):
     X_test = pd.DataFrame(
         data = {
             'vendor_id':test_data.vendor_id,
@@ -51,16 +48,21 @@ def do_predictions(test_data:PredictionDataset):
             'manhattan_distance':test_data.manhattan_distance
          }, index=[0]
     )
+    predictions = model_pipeline.predict(X_test).reshape(-1, 1)
+    output_inverse_trnsfrm = output_transformer.inverse_transform(predictions)[0].item()
+    return f"Trip duration for the trip is {output_inverse_trnsfrm:.2f} minutes"
 
-    predictions = model_pipe.predict(X_test).reshape(-1,1)
-
-    output_inverse_transformed = output_transformer.inverse_transform(predictions)[0].item()
-    
-    
-    return f"Trip duration for the trip is {output_inverse_transformed:.2f} minutes"
 
 
 if __name__ == "__main__":
-    uvicorn.run(app="app:app",
-                host="0.0.0.0",
-                port=8000)
+    uvicorn.run(app="app:app", host="127.0.0.1", port=8000)
+   
+    
+    
+#get -> get some response from API
+
+#post -> sending something to API
+
+#put -> updating something to API
+
+#delete -> deleting something from API
