@@ -1,7 +1,0 @@
-[core]
-    remote = gdrive-remote
-    autostage = true
-['remote "gdrive-remote"']
-    url = gdrive://1jlbffCNTKT6QXf_hrZJfyjXfaP7lNAsD
-    gdrive_use_service_account = true
-    gdrive_service_account_json_file_path = ../dvc-drive-access-a6b1e9535136.json
